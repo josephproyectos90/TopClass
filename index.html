@@ -23,14 +23,11 @@
   --body:"Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --zoom:1; --sec:clamp(80px,11vw,152px);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#18181a; --bg2:#202023; --surface:#26262a; --fg:#f4f2ef; --muted:#b9b8bd; --line:#3a3a3f;
-  --orange-text:#ff9a52; --ok:#7fd484; --band:#121214; --band-2:#1c1c1f; --band-line:#34343a; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#18181a; --bg2:#202023; --surface:#26262a; --fg:#f4f2ef; --muted:#b9b8bd; --line:#3a3a3f;
   --orange-text:#ff9a52; --ok:#7fd484; --band:#121214; --band-2:#1c1c1f; --band-line:#34343a; color-scheme:dark}
 
-html{font-size:calc(100% * var(--zoom));scroll-behavior:smooth;scroll-padding-top:calc(92px + env(safe-area-inset-top,0px))}
+html{font-size:calc(100% * var(--zoom));scroll-behavior:smooth;scroll-padding-top:calc(110px + env(safe-area-inset-top,0px))}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 1.125rem/1.65 var(--body);overflow-x:hidden;-webkit-text-size-adjust:100%}
 body.menu-open{overflow:hidden}
@@ -48,9 +45,9 @@ img{max-width:100%}
 /* ---------- barra superior ---------- */
 .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:color-mix(in srgb,var(--bg) 92%,transparent);
   -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:2px solid var(--orange)}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:84px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:100px}
 .brand{display:flex;align-items:center;gap:14px;min-width:0;text-decoration:none;color:inherit}
-.logo{flex:none;width:60px;height:60px;object-fit:contain;display:block;background:none;border-radius:0}
+.logo{flex:0 1 auto;height:76px;width:auto;max-width:min(64vw,300px);object-fit:contain;object-position:left center;display:block;background:none;border-radius:0}
 .tools{display:flex;align-items:center;gap:10px}
 .tbtn{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;
   display:grid;place-items:center;padding:0;transition:border-color .15s,background .15s}
@@ -66,8 +63,8 @@ img{max-width:100%}
   display:flex;flex-direction:column;gap:36px;box-shadow:-24px 0 60px -30px rgba(0,0,0,.55);overflow-y:auto}
 body.menu-open .scrim{opacity:1;visibility:visible}
 body.menu-open .drawer{transform:none;visibility:visible}
-.drawer-head{display:flex;align-items:center;gap:14px}
-.drawer-head b{font:700 1.45rem/1.1 var(--display);flex:1}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.drawer-head .logo{height:64px;max-width:calc(100% - 64px)}
 .menu{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .menu li{border-bottom:1px solid var(--line)}
 .menu a{display:block;padding:22px 4px;font:600 1.9rem/1.1 var(--display);text-decoration:none}
@@ -92,7 +89,7 @@ body.menu-open .drawer{transform:none;visibility:visible}
 .hero{position:relative;overflow:clip;padding-block:clamp(56px,9vw,120px) clamp(88px,12vw,168px)}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}
 .hero-copy{max-width:52rem}
-.hero h1{font-size:clamp(3rem,7vw,5.6rem);line-height:1;margin-bottom:34px}
+.hero h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:1.06;margin-bottom:30px}
 .lead{font-size:clamp(1.15rem,2vw,1.35rem);color:var(--muted);max-width:30em;margin-inline:auto}
 .cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:46px;justify-content:center}
 
@@ -399,14 +396,22 @@ details p{padding:0 60px 34px 0;color:var(--muted);max-width:42em}
 .clock small{display:block;color:var(--band-muted);font-size:.9rem;margin-bottom:4px}
 .clock b{font:700 1.8rem var(--display);font-variant-numeric:lining-nums tabular-nums}
 
-footer{padding-block:56px 72px;color:var(--muted);font-size:1rem}
-.foot{display:flex;gap:14px 40px;flex-wrap:wrap;justify-content:space-between;align-items:baseline}
-.foot b{font:700 1.5rem var(--display);color:var(--fg)}
+footer{padding-block:56px 64px;color:var(--muted);font-size:1rem;border-top:1px solid var(--line)}
+.foot{display:flex;gap:28px 48px;flex-wrap:wrap;justify-content:space-between;align-items:flex-end}
+.foot-col{display:grid;gap:8px;max-width:30rem}
+.foot b{font:700 1.5rem/1.1 var(--display);color:var(--fg)}
+.foot-k{font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-text)}
+.map-link{display:inline-flex;align-items:center;gap:12px;padding:12px 20px 12px 16px;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);
+  color:var(--fg);text-decoration:none;font-weight:700;font-size:.98rem;line-height:1.3;transition:border-color .15s,transform .15s}
+.map-link:hover{border-color:var(--orange);transform:translateY(-2px)}
+.map-link .ic{color:var(--orange-text);width:1.4em;height:1.4em}
+.map-link small{display:block;font-weight:600;font-size:.85rem;color:var(--muted)}
 
 /* ---------- responsivo ---------- */
 @media (max-width:1100px){
   .guide{grid-template-columns:minmax(0,1fr)}.rail{display:none}
   .stage-main{grid-template-columns:minmax(0,1fr)}
+  .copy{order:-1}
 }
 @media (max-width:860px){
   .tutor{grid-template-columns:minmax(0,1fr)}
@@ -415,8 +420,47 @@ footer{padding-block:56px 72px;color:var(--muted);font-size:1rem}
   details p{padding-right:0}
 }
 @media (max-width:600px){
-  .logo{width:48px;height:48px}
-  .hero h1{margin-bottom:28px}
+  :root{--sec:clamp(56px,14vw,80px)}
+  body{font-size:1.0625rem;line-height:1.7}
+  .wrap{padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+  .bar{min-height:84px}
+  .logo{height:58px;max-width:68vw}
+  .drawer-head .logo{height:52px}
+  .drawer{padding-inline:24px;gap:28px}
+  .menu a{font-size:1.6rem;padding:18px 4px}
+  .hero{padding-block:44px 64px}
+  .hero h1{font-size:2.5rem;line-height:1.1;margin-bottom:22px}
+  .lead{font-size:1.1rem;line-height:1.65}
+  .cta{flex-direction:column;align-items:stretch;gap:12px;margin-top:34px}
+  .cta .btn{width:100%}
+  .sec-head{gap:14px;margin-bottom:32px}
+  .sec-head h2,.tutor h2{font-size:2.1rem;line-height:1.12}
+  .sec-head p,.tutor p.l{font-size:1.05rem}
+  .pick{gap:12px}
+  .dev{min-height:112px;padding:20px 8px;border-radius:18px;font-size:1rem}
+  .guide{margin-top:36px}
+  .stage{padding:18px 16px;border-radius:22px;gap:24px}
+  .nav{gap:10px;padding-bottom:20px}
+  .nav .btn{min-height:56px;padding:0 10px;font-size:.98rem}
+  .nav .btn-main{font-size:1.05rem}
+  .copy{gap:18px}
+  .copy h3{font-size:1.9rem;line-height:1.12}
+  .copy .txt{font-size:1.08rem}
+  .tip{font-size:.98rem}
+  .note{font-size:.95rem;margin-top:24px}
+  summary{padding:22px 0;font-size:1.08rem;gap:14px}
+  summary::after{width:36px;height:36px}
+  details p{padding-bottom:26px}
+  .hours{padding:20px;margin-top:30px}
+  .hours b{font-size:1.4rem}
+  .tz{padding:20px 18px;border-radius:22px;gap:24px}
+  .res{padding:18px}
+  .clock b{font-size:1.55rem}
+  .live{border-radius:20px;align-items:flex-start;line-height:1.4}
+  .live i{margin-top:5px}
+  footer{padding-block:44px 52px}
+  .foot{flex-direction:column;align-items:stretch}
+  .map-link{width:100%}
 }
 @media (max-width:480px){
   .m-cards{grid-template-columns:repeat(3,1fr);gap:.7em;padding:.9em}
@@ -432,7 +476,7 @@ footer{padding-block:56px 72px;color:var(--muted);font-size:1rem}
 <header class="topbar">
   <div class="wrap bar">
     <a class="brand" href="#inicio" aria-label="Floristas de México, centro de ayuda. Ir al inicio">
-      <img class="logo" src="images/iconofloristas.png" alt="Floristas de México" width="60" height="60">
+      <img class="logo" src="images/iconofloristas.png" alt="Floristas de México">
     </a>
     <div class="tools">
       <button class="tbtn burger" id="menuBtn" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menú"><i></i><i></i><i></i></button>
@@ -443,8 +487,7 @@ footer{padding-block:56px 72px;color:var(--muted);font-size:1rem}
 <div class="scrim" id="scrim"></div>
 <nav class="drawer" id="drawer" aria-label="Menú principal" inert>
   <div class="drawer-head">
-    <img class="logo" src="images/iconofloristas.png" alt="Floristas de México" width="52" height="52">
-    <b>Floristas de México</b>
+    <img class="logo" src="images/iconofloristas.png" alt="Floristas de México">
     <button class="tbtn" id="menuClose" aria-label="Cerrar menú"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
   <ul class="menu">
@@ -452,6 +495,7 @@ footer{padding-block:56px 72px;color:var(--muted);font-size:1rem}
     <li><a href="#guia">Guía paso a paso</a></li>
     <li><a href="#dudas">Dudas frecuentes</a></li>
     <li><a href="#tutor">Hablar con un tutor</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
   </ul>
   <button class="switch" id="theme" role="switch" aria-checked="false"><span>Modo oscuro</span><i></i></button>
 </nav>
@@ -540,8 +584,17 @@ footer{padding-block:56px 72px;color:var(--muted);font-size:1rem}
   </section>
 </main>
 
-<footer>
-  <div class="wrap foot"><b>Floristas de México</b><span>Centro de ayuda para estudiantes. Atención de lunes a viernes.</span></div>
+<footer id="ubicacion">
+  <div class="wrap foot">
+    <div class="foot-col"><b>Floristas de México</b><span>Centro de ayuda para estudiantes. Atención de lunes a viernes.</span></div>
+    <div class="foot-col">
+      <span class="foot-k">Visítenos</span>
+      <a class="map-link" href="https://share.google/vMzwMWWfQMbTsz40Z" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.7-6.5-11a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        <span>Puerto Vallarta, Jalisco, México<small>Ver ubicación en Google Maps</small></span>
+      </a>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -567,7 +620,7 @@ drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setM
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { setMenu(false); } });
 
 /* ---------- modo claro / oscuro ---------- */
-const isDark = () => document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+const isDark = () => document.documentElement.dataset.theme === 'dark';
 const syncTheme = () => $('#theme').setAttribute('aria-checked', isDark());
 const savedTheme = store.get('cf-theme'); if (savedTheme) document.documentElement.dataset.theme = savedTheme;
 $('#theme').onclick = () => { const next = isDark() ? 'light' : 'dark'; document.documentElement.dataset.theme = next; store.set('cf-theme', next); syncTheme(); };
