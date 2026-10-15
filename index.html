@@ -118,23 +118,23 @@ body.menu-open .drawer{transform:none;visibility:visible}
 .rail button[aria-current="step"]{background:var(--surface);color:var(--fg);box-shadow:0 0 0 1.5px var(--orange)}
 .rail button[aria-current="step"] .n{background:var(--orange);border-color:var(--orange);color:var(--on-orange)}
 .rail button.done .n{background:var(--ok);border-color:var(--ok);color:#fff}
-.stage{background:var(--surface);border:1px solid var(--line);border-radius:30px;padding:clamp(22px,3.6vw,52px);display:grid;gap:clamp(30px,4vw,44px);min-width:0}
-.stage-top{display:grid;gap:14px}
-.kicker{font-weight:800;font-size:1rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.prog{height:8px;border-radius:99px;background:var(--bg2);overflow:hidden}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:clamp(16px,2.4vw,30px);display:grid;gap:clamp(12px,1.6vw,18px);min-width:0}
+.stage-top{display:grid;gap:8px}
+.kicker{font-weight:800;font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.prog{height:5px;border-radius:99px;background:var(--bg2);overflow:hidden}
 .prog i{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--gold));border-radius:99px;transition:width .5s cubic-bezier(.3,.7,.2,1)}
-.stage-main{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(32px,5vw,68px);align-items:center}
+.stage-main{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(18px,3vw,36px);align-items:center}
 .mock-wrap{container-type:inline-size;min-width:0}
-.copy{display:grid;gap:24px;align-content:center;min-width:0}
-.copy h3{font-size:clamp(2rem,3.4vw,2.7rem)}
-.copy .txt{font-size:1.2rem;line-height:1.65}
+.copy{display:grid;gap:12px;align-content:center;min-width:0}
+.copy h3{font-size:clamp(1.35rem,2vw,1.7rem);line-height:1.15}
+.copy .txt{font-size:1rem;line-height:1.55}
 .copy .txt b{background:color-mix(in srgb,var(--gold) 30%,transparent);padding:0 .25em;border-radius:6px;font-weight:700}
-.tip{display:flex;gap:14px;align-items:flex-start;padding:4px 0 4px 18px;border-left:3px solid var(--gold);font-size:1.02rem;color:var(--muted);line-height:1.55}
-.tip .ic{color:var(--gold);margin-top:2px}
-.replay{font:600 .95rem var(--body);color:var(--muted);background:none;border:0;padding:6px 0;cursor:pointer;text-decoration:underline;justify-self:start}
-.nav{display:flex;gap:12px;padding-bottom:clamp(22px,3vw,32px);border-bottom:1px solid var(--line)}
-.nav .btn{flex:1 1 0;min-height:64px;padding:0 14px}
-.nav .btn-main{flex:2 1 0;font-size:1.25rem;box-shadow:0 12px 26px -12px color-mix(in srgb,var(--orange) 80%,transparent)}
+.tip{display:flex;gap:14px;align-items:flex-start;padding:2px 0 2px 12px;border-left:3px solid var(--gold);font-size:.85rem;color:var(--muted);line-height:1.45}
+.tip .ic{color:var(--gold);margin-top:1px;width:1.1em;height:1.1em}
+.replay{font:600 .85rem var(--body);color:var(--muted);background:none;border:0;padding:6px 0;cursor:pointer;text-decoration:underline;justify-self:start}
+.nav{display:flex;gap:8px}
+.nav .btn{flex:1 1 0;min-height:40px;padding:0 14px;font-size:.92rem;font-weight:700;gap:6px}
+.nav .btn-main{flex:2 1 0}
 .note{margin-top:32px;color:var(--muted);font-size:1rem;max-width:52rem}
 
 /* ---------- maqueta animada ---------- */
@@ -439,14 +439,16 @@ footer{padding-block:56px 64px;color:var(--muted);font-size:1rem;border-top:1px 
   .pick{gap:12px}
   .dev{min-height:112px;padding:20px 8px;border-radius:18px;font-size:1rem}
   .guide{margin-top:36px}
-  .stage{padding:18px 16px;border-radius:22px;gap:24px}
-  .nav{gap:10px;padding-bottom:20px}
-  .nav .btn{min-height:56px;padding:0 10px;font-size:.98rem}
-  .nav .btn-main{font-size:1.05rem}
-  .copy{gap:18px}
-  .copy h3{font-size:1.9rem;line-height:1.12}
-  .copy .txt{font-size:1.08rem}
-  .tip{font-size:.98rem}
+  .stage{padding:14px 12px;border-radius:20px;gap:12px}
+  .stage-main{gap:14px}
+  .mock.phone{font-size:11.5px}
+  .nav{gap:8px}
+  .nav .btn{min-height:38px;padding:0 8px;font-size:.88rem}
+  .nav .btn-main{font-size:.88rem}
+  .copy{gap:8px}
+  .copy h3{font-size:1.25rem;line-height:1.15}
+  .copy .txt{font-size:.95rem;line-height:1.5}
+  .tip{font-size:.8rem}
   .note{font-size:.95rem;margin-top:24px}
   summary{padding:22px 0;font-size:1.08rem;gap:14px}
   summary::after{width:36px;height:36px}
