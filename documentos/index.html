@@ -131,14 +131,60 @@ textarea{min-height:92px;resize:vertical;font-weight:400;font-size:1.02rem;line-
 :root[data-theme="dark"] #msg.err{color:#ff8a70}
 .menu a[aria-current="page"]{color:var(--orange-text)}
 @media (max-width:560px){.brand-t b{font-size:1.25rem}.go .btn{width:100%}}
+
+/* ---------- Identidad visual alineada con Centro de ayuda ---------- */
+:root{
+  --bg:#f8f7f5; --bg2:#ecebe8; --surface:#fff; --fg:#2a2b2e; --muted:#66676c; --line:#dddbd7;
+  --orange:#ee7a1f; --on-orange:#231106; --orange-text:#b04a06; --gold:#f6a45f; --coral:#a5a7ac; --leaf:#3a3b3f;
+  --ok:#2c7a31; --band:#2b2c30; --band-2:#35363b; --band-fg:#f5f3f0; --band-muted:#c4c5c9; --band-line:#4b4c52;
+}
+:root[data-theme="dark"]{
+  --bg:#18181a; --bg2:#202023; --surface:#26262a; --fg:#f4f2ef; --muted:#b9b8bd; --line:#3a3a3f;
+  --orange-text:#ff9a52; --ok:#7fd484; --band:#121214; --band-2:#1c1c1f; --band-line:#34343a; color-scheme:dark;
+}
+.topbar{background:color-mix(in srgb,var(--bg) 92%,transparent);border-bottom:2px solid var(--orange)}
+.bar{min-height:100px}
+.brand{gap:14px}
+.logo{flex:0 1 auto;width:auto;height:76px;max-width:min(40vw,210px);object-fit:contain;object-position:left center;display:block;background:none;border-radius:0}
+.brand-t{display:flex;flex-direction:column;min-width:0;line-height:1.1}
+.brand-t b{font:700 1.55rem/1 var(--display);letter-spacing:.005em;white-space:nowrap}
+.brand-t span{font-size:.95rem;font-weight:700;color:var(--orange-text);margin-top:5px}
+.drawer-head{justify-content:space-between}
+.drawer-head .logo{height:64px;max-width:calc(100% - 64px)}
+.menu a:hover{color:var(--orange-text)}
+.tool{padding-block:clamp(56px,9vw,120px) clamp(88px,12vw,150px)}
+.tool h1{line-height:1.06;letter-spacing:-.005em}
+.lead{line-height:1.65}
+.card{border-radius:26px;box-shadow:0 12px 30px -28px rgba(40,25,10,.35);transition:border-color .18s,transform .18s}
+.card:focus-within{border-color:color-mix(in srgb,var(--orange) 45%,var(--line))}
+.num{box-shadow:0 3px 9px -5px color-mix(in srgb,var(--orange) 85%,transparent)}
+.drop{background:color-mix(in srgb,var(--bg2) 45%,var(--surface));transition:border-color .18s,background .18s}
+.it{border-radius:20px;transition:transform .18s,border-color .18s,box-shadow .18s}
+.it:hover{transform:translateY(-2px);border-color:var(--orange);box-shadow:0 12px 24px -20px rgba(0,0,0,.4)}
+input[type=text]:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(--orange) 30%,transparent);outline-offset:1px;border-color:var(--orange)}
+.chip span{transition:background .15s,border-color .15s}
+.go .btn{box-shadow:0 14px 28px -14px color-mix(in srgb,var(--orange) 75%,transparent)}
+@media(max-width:600px){
+  .bar{min-height:84px}
+  .logo{height:58px;max-width:32vw}
+  .brand-t b{font-size:1.25rem}
+  .brand-t span{font-size:.82rem}
+  .drawer-head .logo{height:52px;max-width:calc(100% - 64px)}
+  .drawer{padding-inline:24px;gap:28px}
+  .menu a{font-size:1.6rem;padding:18px 4px}
+  .tool{padding-block:44px 64px}
+  .tool h1{font-size:2.5rem;line-height:1.1;margin-bottom:22px}
+  .lead{font-size:1.1rem;line-height:1.65}
+  .card{border-radius:22px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.001s!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="wrap bar">
     <a class="brand" href="Classroom_Fácil.html" aria-label="Floristas de México. Ir al inicio">
-      <!-- IMAGEN: para poner su logo, reemplace este <span class="logo"> por:  <img class="logo" src="logo.png" alt="Floristas de México"> -->
-      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(60 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(120 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(180 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(240 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(300 12 12)"/></svg></span>
+      <img class="logo" src="images/iconofloristas.png" alt="Floristas de México">
       <span class="brand-t"><b>Floristas de México</b><span>Imágenes a PDF</span></span>
     </a>
     <div class="tools">
@@ -150,8 +196,7 @@ textarea{min-height:92px;resize:vertical;font-weight:400;font-size:1.02rem;line-
 <div class="scrim" id="scrim"></div>
 <nav class="drawer" id="drawer" aria-label="Menú principal" inert>
   <div class="drawer-head">
-    <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(60 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(120 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(180 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(240 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(300 12 12)"/></svg></span>
-    <b>Floristas de México</b>
+    <img class="logo" src="images/iconofloristas.png" alt="Floristas de México">
     <button class="tbtn" id="menuClose" aria-label="Cerrar menú"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
   <ul class="menu">
@@ -216,7 +261,6 @@ textarea{min-height:92px;resize:vertical;font-weight:400;font-size:1.02rem;line-
     </div>
   </div>
 </main>
-<div class="scrim" id="scrim"></div>
 
 <script>
 const $ = s => document.querySelector(s);
