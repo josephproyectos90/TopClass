@@ -183,8 +183,8 @@ input[type=text]:focus,select:focus,textarea:focus{outline:3px solid color-mix(i
 <body>
 <header class="topbar">
   <div class="wrap bar">
-    <a class="brand" href="Classroom_Fácil.html" aria-label="Floristas de México. Ir al inicio">
-      <img class="logo" src="images/iconofloristas.png" alt="Floristas de México">
+    <a class="brand" href="https://topclass.lat/" aria-label="Floristas de México. Ir al inicio">
+      <img class="logo" src="../images/iconofloristas.png" alt="Floristas de México">
       <span class="brand-t"><b>Floristas de México</b><span>Imágenes a PDF</span></span>
     </a>
     <div class="tools">
@@ -196,12 +196,12 @@ input[type=text]:focus,select:focus,textarea:focus{outline:3px solid color-mix(i
 <div class="scrim" id="scrim"></div>
 <nav class="drawer" id="drawer" aria-label="Menú principal" inert>
   <div class="drawer-head">
-    <img class="logo" src="images/iconofloristas.png" alt="Floristas de México">
+    <img class="logo" src="../images/iconofloristas.png" alt="Floristas de México">
     <button class="tbtn" id="menuClose" aria-label="Cerrar menú"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
   <ul class="menu">
-    <li><a href="Classroom_Fácil.html">Inicio</a></li>
-    <li><a href="Classroom_Fácil.html#guia">Guía paso a paso</a></li>
+    <li><a href="https://topclass.lat/">Inicio</a></li>
+    <li><a href="https://topclass.lat/#guia">Guía paso a paso</a></li>
     <li><a href="#herramienta" aria-current="page">Imágenes a PDF</a></li>
   </ul>
   <button class="switch" id="theme" role="switch" aria-checked="false"><span>Modo oscuro</span><i></i></button>
@@ -327,7 +327,7 @@ drop.addEventListener('drop', e => add(e.dataTransfer.files));
 /* ---------- PDF (hojas A4 dibujadas y empaquetadas como PDF, sin librerías) ---------- */
 const W = 1240, H = 1754, M = 70, GAP = 36;
 const F = '"Nunito Sans","Segoe UI",system-ui,Arial,sans-serif';
-const LOGO = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fbf5ee" stroke-width="1.4" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(60 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(120 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(180 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(240 12 12)"/><ellipse cx="12" cy="6.2" rx="2.4" ry="3.8" transform="rotate(300 12 12)"/></svg>');
+const LOGO = '../images/iconofloristas.png';
 const loadImg = src => new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = src; });
 const rr = (x, a, b, w, h, r) => { x.beginPath(); x.moveTo(a + r, b); x.arcTo(a + w, b, a + w, b + h, r); x.arcTo(a + w, b + h, a, b + h, r); x.arcTo(a, b + h, a, b, r); x.arcTo(a, b, a + w, b, r); x.closePath(); };
 function wrapText(x, text, maxW, maxLines) {
