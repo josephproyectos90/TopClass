@@ -56,6 +56,11 @@ img{max-width:100%}
 .burger i{display:block;width:20px;height:2px;border-radius:2px;background:currentColor}
 
 
+/* Pestañas de navegación para acceder a la herramienta desde la página principal */
+.top-tabs{display:flex;align-items:center;gap:6px;margin-left:auto;margin-right:12px;min-width:0}
+.top-tab{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 15px;border:1px solid transparent;border-radius:999px;color:var(--muted);font:800 .96rem/1.1 var(--body);text-decoration:none;white-space:nowrap;transition:background .18s,border-color .18s,color .18s}
+.top-tab:hover{color:var(--fg);background:var(--surface);border-color:var(--line)}
+.top-tab.active{color:var(--orange-text);background:color-mix(in srgb,var(--orange) 12%,var(--surface));border-color:color-mix(in srgb,var(--orange) 42%,var(--line))}
 /* menú hamburguesa */
 .scrim{position:fixed;inset:0;background:rgba(30,18,10,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;z-index:70}
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,90vw);background:var(--surface);z-index:80;transform:translateX(100%);visibility:hidden;
@@ -464,6 +469,24 @@ footer{padding-block:56px 64px;color:var(--muted);font-size:1rem;border-top:1px 
   .foot{flex-direction:column;align-items:stretch}
   .map-link{width:100%}
 }
+@media (max-width:760px){
+  .bar{gap:8px;min-height:82px}
+  .top-tabs{gap:4px;margin-right:2px}
+  .top-tab{min-height:38px;padding:0 10px;font-size:.82rem}
+  .logo{max-width:clamp(100px,25vw,190px);height:58px}
+  .tbtn{width:44px;height:44px}
+}
+@media (max-width:560px){
+  .top-tabs{gap:3px}
+  .top-tab{padding:0 8px;font-size:.75rem;white-space:normal;text-align:center;max-width:100px}
+  .brand{flex:0 1 auto}
+  .logo{max-width:clamp(84px,21vw,125px);height:48px}
+  .bar{min-height:72px}
+}
+@media (max-width:390px){
+  .top-tab:nth-child(2){display:none}
+  .top-tab{font-size:.78rem;padding:0 9px}
+}
 @media (max-width:480px){
   .m-cards{grid-template-columns:repeat(3,1fr);gap:.7em;padding:.9em}
 }
@@ -480,6 +503,11 @@ footer{padding-block:56px 64px;color:var(--muted);font-size:1rem;border-top:1px 
     <a class="brand" href="#inicio" aria-label="Floristas de México, centro de ayuda. Ir al inicio">
       <img class="logo" src="images/iconofloristas.png" alt="Floristas de México">
     </a>
+    <nav class="top-tabs" aria-label="Accesos principales">
+      <a class="top-tab active" href="#inicio" aria-current="page">Inicio</a>
+      <a class="top-tab" href="#guia">Guía paso a paso</a>
+      <a class="top-tab" href="https://topclass.lat/herramienta/">Imágenes a PDF</a>
+    </nav>
     <div class="tools">
       <button class="tbtn burger" id="menuBtn" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menú"><i></i><i></i><i></i></button>
     </div>
@@ -495,6 +523,7 @@ footer{padding-block:56px 64px;color:var(--muted);font-size:1rem;border-top:1px 
   <ul class="menu">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#guia">Guía paso a paso</a></li>
+    <li><a href="https://topclass.lat/herramienta/">Herramienta: imágenes a PDF ↗</a></li>
     <li><a href="#dudas">Dudas frecuentes</a></li>
     <li><a href="#tutor">Hablar con un tutor</a></li>
     <li><a href="#ubicacion">Ubicación</a></li>
