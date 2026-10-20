@@ -362,10 +362,14 @@ function base(n, total, meta, logo) {
   const x = cv.getContext('2d');
   x.fillStyle = '#fff'; x.fillRect(0, 0, W, H);
   // encabezado: icono + «TopClass · Nivel N» + nombre y tema
-  x.fillStyle = '#3a3a40'; x.beginPath(); x.arc(M + 48, 92, 48, 0, 7); x.fill(); x.drawImage(logo, M + 16, 60, 64, 64);
-  x.fillStyle = '#2b2b30'; x.font = '800 56px ' + F; x.fillText('TopClass · Nivel ' + meta.nivel, M + 128, 90);
+  // Logotipo horizontal, sin círculo de fondo, como en la web.
+  const logoW = 142, logoH = 76, logoScale = Math.min(logoW / logo.naturalWidth, logoH / logo.naturalHeight);
+  const logoDrawW = logo.naturalWidth * logoScale, logoDrawH = logo.naturalHeight * logoScale;
+  x.drawImage(logo, M, 55 + (logoH - logoDrawH) / 2, logoDrawW, logoDrawH);
+  const tx = M + logoW + 24;
+  x.fillStyle = '#2b2b30'; x.font = '800 56px ' + F; x.fillText('TopClass · Nivel ' + meta.nivel, tx, 90);
   x.fillStyle = '#6a6a70'; x.font = '600 32px ' + F;
-  x.fillText(wrapText(x, meta.nombre + (meta.tema ? ' · ' + meta.tema : ''), W - 2 * M - 128, 1)[0], M + 128, 136);
+  x.fillText(wrapText(x, meta.nombre + (meta.tema ? ' · ' + meta.tema : ''), W - M - tx, 1)[0], tx, 136);
   x.fillStyle = '#ee6a1d'; x.fillRect(M, 176, W - 2 * M, 6);
   // pie
   x.font = '600 24px ' + F; x.fillStyle = '#8a8a90'; x.fillText('Floristas de México · TopClass', M, H - 50);
@@ -379,10 +383,17 @@ async function textPage(lines, n, total, meta, logo) {
   lines.forEach((l, i) => x.fillText(l, M, TTOP + TFS + i * TLH));
   return toJpg(cv);
 }
-async function drawPage(group, n, total, meta, logo, pp) {
+async function drawPage(group, n, total, meta, logo, pp, introLines = []) {
   const [cv, x] = base(n, total, meta, logo);
+  // Una explicación breve se coloca encima de las fotos, evitando una página casi vacía.
+  let top = 230;
+  if (introLines.length) {
+    x.font = '400 30px ' + F; x.fillStyle = '#2b2b30';
+    introLines.forEach((line, i) => x.fillText(line, M, 222 + i * 39));
+    top = 245 + introLines.length * 39;
+  }
   // imágenes con su descripción
-  const cols = pp === 4 ? 2 : 1, cw = (W - 2 * M - GAP * (cols - 1)) / cols, top = 230, cellH = (H - 90 - top - GAP) / 2;
+  const cols = pp === 4 ? 2 : 1, cw = (W - 2 * M - GAP * (cols - 1)) / cols, cellH = (H - 90 - top - GAP) / 2;
   const capH = pp === 4 ? 150 : 170, fs = pp === 4 ? 27 : 31, maxL = pp === 4 ? 3 : 4, fh = cellH - capH - 14;
   for (let k = 0; k < group.length; k++) {
     const it = group[k], cx = M + (k % cols) * (cw + GAP), cy = top + Math.floor(k / cols) * (cellH + GAP);
@@ -427,15 +438,22 @@ $('#go').onclick = async () => {
     for (const it of items) it.img = await loadImg(it.url);
     const m = document.createElement('canvas').getContext('2d'); m.font = '400 ' + TFS + 'px ' + F;
     const tl = texto ? flow(m, texto, W - 2 * M) : [], tPages = [];
-    for (let i = 0; i < tl.length; i += TLINES) {
-      const c = tl.slice(i, i + TLINES); while (c.length && c[0] === '') c.shift(); while (c.length && c[c.length - 1] === '') c.pop();
+    // Si el comentario es breve (hasta 4 líneas), acompaña a las fotos en la primera hoja.
+    // Los textos largos conservan sus páginas propias para que se lean cómodamente.
+    const shortIntro = items.length && tl.filter(line => line.trim()).length <= 4 ? tl.filter(line => line.trim()) : [];
+    const textForPages = shortIntro.length ? [] : tl;
+    for (let i = 0; i < textForPages.length; i += TLINES) {
+      const c = textForPages.slice(i, i + TLINES); while (c.length && c[0] === '') c.shift(); while (c.length && c[c.length - 1] === '') c.pop();
       if (c.length) tPages.push(c);
     }
     const nImg = Math.ceil(items.length / pp), total = tPages.length + nImg, jpgs = [], meta = {nivel, nombre, tema};
     for (let p = 0; p < total; p++) {
       say(`Preparando la hoja ${p + 1} de ${total}…`);
-      jpgs.push(p < tPages.length ? await textPage(tPages[p], p + 1, total, meta, logo)
-        : await drawPage(items.slice((p - tPages.length) * pp, (p - tPages.length) * pp + pp), p + 1, total, meta, logo, pp));
+      if (p < tPages.length) jpgs.push(await textPage(tPages[p], p + 1, total, meta, logo));
+      else {
+        const imagePage = p - tPages.length;
+        jpgs.push(await drawPage(items.slice(imagePage * pp, imagePage * pp + pp), p + 1, total, meta, logo, pp, imagePage === 0 ? shortIntro : []));
+      }
     }
     const a = document.createElement('a');
     a.href = URL.createObjectURL(buildPDF(jpgs));
